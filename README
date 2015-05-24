@@ -1,0 +1,24 @@
+#1 Install Flask
+
+	# Mac Os X
+
+	Install pip
+	  $ sudo easy_install pip
+
+	Install Flask
+	  $ sudo pip install Flask
+
+	Install virtualenv
+	  $ sudo easy_install virtualenv
+
+
+	# Linux
+
+	Install pip
+	  $ sudo apt-get install python-pip
+
+	Install Flask
+	  $ pip install Flask
+
+	Install virtualenv
+	  $ sudo apt-get install python-virtualenv

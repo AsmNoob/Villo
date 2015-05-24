@@ -1,0 +1,14 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+	{% from "_formhelpers.html" import render_textfield,render_radiofield %}
+
+	{% block content %}
+		<div class="container" style="margin-top:50px;">
+		  <form action="" method="post" name="login">
+		  	<p>{{ render_radiofield(form.price) }}</p>
+		  	<p>{{ render_textfield(form.bank) }}</p>
+		  	{{ form.csrf_token }}
+		    <p><input type="submit" value="Payer"></p>
+		  </form>
+		</div>
+	{% endblock %}

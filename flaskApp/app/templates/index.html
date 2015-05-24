@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+	{% from "_formhelpers.html" import render_selectfield %}
+	<div id="userPanel" class="col-xs-6" style="height:100%; min-width: 250px;  width:20%; background-color:whitesmoke; padding:20px;">
+		<ul id="userInfo" style="list-style-type:none;">
+			{% if user.is_authenticated() %}
+				{% if user.isAbonne %}
+					<li> <i class="glyphicon glyphicon-user"></i> {{ user.firstName }} {{ user.name }} </li>
+					<li> <i class="glyphicon glyphicon-earphone"></i> {{ user.phone }} </li>
+					<li><i class="glyphicon glyphicon-envelope"></i> {{ user.number }} {{ user.street }} </li>
+					<li><i class="glyphicon glyphicon-envelope" style="color:transparent;"></i> {{ user.postal }} {{ user.city }} </li>
+				{% else %}
+					<li> <a href="/register">To subscribe</a> </li>
+				{% endif %}
+					{% if user.isStillValid() %}
+						<li> <i class="glyphicon glyphicon-time"></i> {{ user.validityDate.replace('T',' ') }} </li>
+					{% else %}
+						<li style="color:red;"> <i class="glyphicon glyphicon-time"></i> {{ user.validityDate.replace('T',' ') }} </li>
+					{% endif %}		
+			{% endif %}
+		</ul>
+
+	    <form method="post" action="/">
+			{{ render_selectfield(form.stations) }}
+			<div class="stationInfo"> </div>
+		</form>
+
+		<div id="errorBox">
+	      {% with messages = get_flashed_messages() %}
+	        {% if messages %}
+	          {% for message in messages %}
+	              <p>{{ message.decode('utf-8') }}</p>
+	          {% endfor %}
+	        {% endif %}
+	      {% endwith %}
+	    </div>
+	</div>
+
+	<div id="map-canvas" class="col-xs-6"></div>
+	<div id="legend" style="z-index: 0; position: absolute; bottom: 0px; right: 0px; margin:20px; padding:10px; background-color:white; border-radius:10px;">
+		<b style="margin-left: 5px">Legend</b>
+		<div style="margin: 2px"><img src='http://maps.google.com/mapfiles/kml/paddle/orange-blank.png' width="32" height="32"> 
+			Sans borne
+		</div>
+		<div style="margin: 2px"><img src='http://maps.google.com/mapfiles/kml/paddle/orange-stars.png' width="32" height="32"> 
+			Avec borne
+		</div>
+	</div>
+    
+{% endblock %}

@@ -1,0 +1,16 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+  {% from "_formhelpers.html" import render_textfield %}
+  <div class="container" style="margin-top:50px;">
+    <form method="post" action="/login" >
+      <table>
+          <tr>{{ render_textfield(form.uid) }}</tr>
+          <tr>{{ render_textfield(form.password) }}</tr>
+      </table>
+      {{ render_textfield(form.hidden) }}
+      {{ form.csrf_token }}
+      <div><input type=submit value=Login></div>
+    </form>
+  </div>
+{% endblock %}

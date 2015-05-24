@@ -1,0 +1,23 @@
+<p> Vélos disponibles : {{ station.getAvailableVillos() }} <br>
+Points d'attache disponibles : {{ station.getFreeSpots() }} </p>
+	
+	{% if user.is_authenticated() %}
+		<form>
+		{% if user.hasVillo() %}
+			<button type="button" onclick="stopRent({{station.id}})"> <i class="glyphicon glyphicon-download-alt"></i> Déposer </button>
+		{% else %}
+			{% if user.isStillValid() %}
+				<select name="villoSelector" class="villoSelector" style="width:100%;" >
+				{% for value,name in station.getVilloOptions() %}
+					<option value="{{value}}">{{name}}</option>
+				{% endfor %}
+			
+				</select>
+				<button type="button" onclick="if (this.form.villoSelector.value!=-1) rentVillo({{station.id}},this.form.villoSelector.value);"> <i class="glyphicon glyphicon-road"></i> Louer</button>
+				<button type="button" onclick="if (this.form.villoSelector.value!=-1) brokenBike({{station.id}},this.form.villoSelector.value)"> <i class="glyphicon glyphicon-wrench"></i> Défectueux</button>
+			{% else %}
+				<p style="color:red;">Votre abonnenement n'est plus valide.</p>
+			{% endif%}
+		{% endif %}
+		</form>
+	{% endif %}

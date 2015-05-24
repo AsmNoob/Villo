@@ -1,0 +1,23 @@
+{% macro render_textfield(field) %}
+  <td>{{ field.label }}</td>
+  <td>{{ field(**kwargs)|safe }}</td>
+  {% if field.errors %}
+  <td>
+    {% for error in field.errors %}
+      <p style="color:red">{{ error.decode('utf-8') }}</p>
+    {% endfor %}
+  </td>
+  {% endif %}
+{% endmacro %}
+
+{% macro render_selectfield(field) %}
+  <p>{{ field(style="width:100%;",onchange="getStationInfo(this.value); changeMarker(this.value);", **kwargs)|safe }}</p>
+{% endmacro %}
+
+{% macro render_radiofield(field) %}
+  {% for value, label, _ in field.iter_choices() %}
+      <label class="checkbox-inline">
+        <input type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}"> {{ label }}
+      </label>
+  {% endfor %}
+{% endmacro %}

@@ -1,0 +1,5 @@
+.DS_Store
+flaskApp/flask/*
+flaskApp/__pycache__/*
+flaskApp/app/__pycache__/*
+flaskApp/bootstrap-3.3.4-dist/*

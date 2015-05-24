@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  {% from "_formhelpers.html" import render_textfield %}
+    <div class="container">
+      <table class="table">
+        <tr> 
+          <th> Heure de départ </th>
+          <th> Station de départ </th>
+          <th> Heure d'arrivée </th>
+          <th> Station d'arrivée </th>
+        </tr>
+        {% for heureDepart,stationDepart,heureArrivee,stationArrivee in user.getMoves() %}
+          <tr>
+            <td> {{ heureDepart.replace('T',' ') }} </td>
+            <td> {{ stationDepart }} </td>
+            <td> {{ heureArrivee.replace('T',' ') }} </td>
+            <td> {{ stationArrivee }} </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+{% endblock %}

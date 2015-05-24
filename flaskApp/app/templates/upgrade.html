@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+	{% from "_formhelpers.html" import render_textfield %}
+	<form method="post" action="/upgrade">
+		<table class="table">
+	    	<tr>{{ render_textfield(form.name) }}</tr>
+	    	<tr>{{ render_textfield(form.firstName) }}</tr>
+	    	<tr>{{ render_textfield(form.phone) }}</tr>
+	 		<tr>{{ render_textfield(form.street) }}</tr>
+			<tr>{{ render_textfield(form.number) }}</tr>
+			<tr>{{ render_textfield(form.postal) }}</tr>
+			<tr>{{ render_textfield(form.city) }}</tr>
+		</table>
+		{{ form.csrf_token }}
+		<div><input type=submit value=Register></div>
+	</form>
+{% endblock %}
